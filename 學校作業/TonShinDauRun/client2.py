@@ -18,6 +18,11 @@ client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server_address = ('localhost', 5555)
 client_socket.connect(server_address)
 
+# Ask for nickname
+nickname = input("Enter your nickname: ")
+# Display the nickname locally
+print("You are now chatting as:", nickname + ":")
+
 # Start a thread to receive messages from the server
 receive_thread = threading.Thread(target=receive_messages)
 receive_thread.start()
@@ -27,8 +32,8 @@ while True:
     message = input()
     if message.lower() == 'exit':
         break
-    # Send the message to the server
-    client_socket.send(message.encode('utf-8'))
+    # Send the message to the server with nickname
+    client_socket.send((nickname + ": " + message).encode('utf-8'))
 
 # Close the client socket
 client_socket.close()
