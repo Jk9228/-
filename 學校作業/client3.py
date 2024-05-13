@@ -15,7 +15,7 @@ def receive_messages():
 client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # Connect to the server
-server_address = ('26.36.225.162', 5555)
+server_address = ('192.168.115.180', 5555)
 client_socket.connect(server_address)
 
 # Ask for nickname
