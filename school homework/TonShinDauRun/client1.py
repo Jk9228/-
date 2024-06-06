@@ -19,9 +19,9 @@ server_address = ('localhost', 5555)
 client_socket.connect(server_address)
 
 # Ask for nickname
-nickname = input("Enter your nickname: ")
+nickname = input("請輸入暱稱: ")
 # Display the nickname locally
-print("You are now chatting as:", nickname + ":")
+print("你現在將以:", nickname + "為暱稱開始聊天:")
 
 # Start a thread to receive messages from the server
 receive_thread = threading.Thread(target=receive_messages)

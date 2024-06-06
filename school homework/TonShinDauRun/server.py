@@ -3,13 +3,13 @@ import threading
 
 # Function to handle client connections
 def handle_client(client_socket, address):
-    print(f"Connected to {address}")
+    print(f"連線到 {address}")
     while True:
         # Receive data from the client
         data = client_socket.recv(1024).decode('utf-8')
         if not data:
             break
-        print(f"Received message from {address}: {data}")
+        print(f"接收來自 {address}: {data} 的訊息")
         # Call broadcast function, passing the client's socket as an argument
         broadcast(data, client_socket)
 
@@ -40,7 +40,7 @@ server_socket.bind(server_address)
 # Listen for incoming connections
 server_socket.listen(5)
 
-print("Server is listening...")
+print("伺服器正在監聽...")
 
 # List to keep track of connected clients
 clients = []
