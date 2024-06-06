@@ -32,7 +32,7 @@ def broadcast(message, sender_socket):
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # Define the server address and port
-server_address = ('26.36.225.162', 5555)
+server_address = ('localhost', 5555)
 
 # Bind the server to the address and port
 server_socket.bind(server_address)
