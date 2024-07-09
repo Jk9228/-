@@ -4,7 +4,7 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/**",
-                "/usr/include",
+                "/Users/jk9228/Documents/github/-/遊戲試做",
                 "/usr/include/SDL2"
             ],
             "defines": [],
