@@ -15,11 +15,12 @@ records = cursor.fetchall()
 
 
 def show_member_info(request):
-    for members in records:
-        print(members)
-    return render(request, "member_page.html" , {
-        'member_name': 'jun',
-        'member_age': '20'
+    members_info = []
+    for member in records:
+        members_info.append({'name': member[0], 'age': member[1]})  
+
+    return render(request, "member_page.html", {
+        'members': members_info
     })
 cursor.close()
 connection.close()
