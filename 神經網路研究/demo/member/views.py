@@ -17,8 +17,8 @@ records = cursor.fetchall()
 def show_member_info(request):
     members_info = []
     for member in records:
-        members_info.append({'name': member[0], 'age': member[1]})  
-
+        members_info.append({member[0], member[1]})  
+        
     return render(request, "member_page.html", {
         'members': members_info
     })
