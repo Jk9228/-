@@ -1,26 +1,77 @@
+from django.http import HttpResponse, HttpResponseRedirect
+from django.template import loader
 from django.shortcuts import render
 import mysql.connector
+
 # Create your views here.
 
-connection = mysql.connector.connect(host='localhost', port='3306',
-user='Jk9228', password='1234')
+class connect_mysql_info:
+    def __init__(self):
+        self.connection = mysql.connector.connect(
+            host='localhost', 
+            port='3306',
+            user='Jk9228', 
+            password='1234'
+            )
 
-cursor = connection.cursor()
+        self.cursor = self.connection.cursor()
 
-cursor.execute("use ooschool;")
-
-cursor.execute("SELECT * FROM member ORDER BY age DESC limit 3;")
-records = cursor.fetchall()
-
-
-
-def show_member_info(request):
-    members_info = []
-    for member in records:
-        members_info.append({member[0], member[1]})  
+        self.cursor.execute("use ooschool;")
         
-    return render(request, "member_page.html", {
-        'members': members_info
-    })
-cursor.close()
-connection.close()
+    def member_info_all(self):
+
+        self.cursor.execute("SELECT * FROM member ORDER BY age DESC limit 3;")
+
+        records = self.cursor.fetchall()
+
+        return records
+    
+    def member_info_name(self):
+
+        self.cursor.execute("SELECT name FROM member ORDER BY age DESC limit 3;")
+
+        records = self.cursor.fetchall()
+
+        return records
+    
+    def member_info_age(self):
+        
+        self.cursor.execute("SELECT age FROM member ORDER BY age DESC limit 3;")
+
+        records = self.cursor.fetchall()
+
+        return records
+    
+    def close_connection(self):
+        self.cursor.close()
+        self.connection.close()
+
+class member:
+    def members_info(records):
+        members_info = []
+        members_info.append(records)
+        return members_info
+    
+def show_member_info(request):
+    connection = connect_mysql_info()
+    
+    records1 = connection.member_info_all()
+    members_info = member.members_info(records1)
+    
+    records2 = connection.member_info_name()
+    members_name = member.members_info(records2)
+    
+    records3 = connection.member_info_age()
+    members_age = member.members_info(records3)
+    
+    connection.close_connection()
+    
+    template = loader.get_template('member_page.html')
+    context = {
+        'members': members_info, 
+        'name': members_name, 
+        'age': members_age
+        
+    }
+    
+    return HttpResponse(template.render(context, request))

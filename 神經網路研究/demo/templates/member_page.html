@@ -7,8 +7,13 @@
     <title>MultiMedia Network Lab member</title>
 </head>
 <body>
-    {{member_name}}
-    {{member_age}}
-    {{members}}
+    <ul>
+        {% for x in members %}
+            <div>
+                <li>Name:{{name}}</li>
+                <li>Age:{{age}}</li>
+            </div>
+        {% endfor %}
+    </ul>
 </body>
 </html>
