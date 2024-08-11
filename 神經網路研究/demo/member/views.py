@@ -2,6 +2,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.shortcuts import render
 import mysql.connector
+from django.http import JsonResponse
+import json
 
 # Create your views here.
 
@@ -51,6 +53,21 @@ class member:
         members_info = []
         members_info.append(records)
         return members_info
+    
+    
+def recieve_Data(request):
+    if(request.method == "POST"):
+        reg = request.body.decode()
+        
+        print(type(reg))
+        reg = json.loads(reg)
+        
+        print(type(reg), reg)
+        
+        return HttpResponse("OK")
+    
+    reg = request.method
+    return JsonResponse({'foo':reg})
     
 def show_member_info(request):
     connection = connect_mysql_info()
