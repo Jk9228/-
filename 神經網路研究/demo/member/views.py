@@ -55,8 +55,8 @@ class member:
         return members_info
     
     
-def recieve_Data(request):
-    if(request.method == "POST"):
+def receive_Data(request):
+    if(request.method == 'POST'):
         reg = request.body.decode()
         
         print(type(reg))
@@ -64,7 +64,7 @@ def recieve_Data(request):
         
         print(type(reg), reg)
         
-        return HttpResponse("OK")
+        return HttpResponse("Hello ", reg)
     
     reg = request.method
     return JsonResponse({'foo':reg})
