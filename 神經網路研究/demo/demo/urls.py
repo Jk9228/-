@@ -17,9 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from member.views import show_member_info, receive_Data
+from ClassServices.views import studentMethod
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("member_info/", show_member_info),
     path("receive_Data/", receive_Data),
+    
+    path("studentMethod/", studentMethod),
 ]

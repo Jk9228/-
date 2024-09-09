@@ -56,18 +56,20 @@ class member:
     
     
 def receive_Data(request):
-    if(request.method == 'POST'):
-        reg = request.body.decode()
+    if request.method == 'POST':
+        reg = request.body.decode('UTF-8')
         
-        print(type(reg))
+        print(type(reg))  # 列印解碼後的類型
         reg = json.loads(reg)
         
-        print(type(reg), reg)
+        print(type(reg), reg)  # 列印JSON轉換後的類型和內容
         
-        return HttpResponse("Hello ", reg)
+        name = reg.get('Name', 'Stranger')  # 獲取'Name'參數，默認為'Stranger'
+        return HttpResponse(f"Hello, {name}")
     
+    # 如果請求不是POST，返回方法名稱
     reg = request.method
-    return JsonResponse({'foo':reg})
+    return JsonResponse({'foo': reg})
     
 def show_member_info(request):
     connection = connect_mysql_info()
