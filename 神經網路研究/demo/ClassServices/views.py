@@ -45,8 +45,8 @@ class connect_mysql_info:
     
     def member_info_add(self, name, id, interest):
         try:    
-            self.cursor.execute("INSERT INTO student VALUES(%s, %s, %s)",(name ,id, interest))
-            self.cursor.commit()
+            self.cursor.execute("INSERT INTO student VALUES(%s, %s, %s);",(name ,id, interest))
+            self.connection.commit()
             return HttpResponse("insert complete")
         except mysql.connector.Error:
             self.connection.rollback()
@@ -54,6 +54,7 @@ class connect_mysql_info:
         
         
     def check_change(self):
+        self.cursor.execute("DESCRIBE student;")
         return self.cursor.rowcount
     
     def close_connection(self):
@@ -92,7 +93,7 @@ def studentMethod(request):
             name = reg.get('Name', 'Stranger')# 獲取'Name'參數，默認為'Stranger'
             id = reg.get('ID', 'z00000000')
             interest = reg.get('Interest')
-            connection.member_info_add(name, id, interest)
+            return HttpResponse(connection.member_info_add(name, id, interest))
                 
         elif method == "reverse":
             string = "hello"

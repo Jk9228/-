@@ -12,4 +12,4 @@ def send_to_server(method, name = '', id = '', interest = ''):
     return x.text
 
 # 測試發送請求
-print(send_to_server('upload'))
+print(send_to_server('starify'))
